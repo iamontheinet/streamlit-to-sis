@@ -43,7 +43,7 @@ with st.container():
 
     with col1:
         st.subheader(
-            "Upload your Streamlit Python app file, OR 👉"
+            "Upload your Streamlit app Python file, OR 👉"
         )
         uploaded_file = st.file_uploader(
             "Upload your Streamlit Python file", accept_multiple_files=False, label_visibility="hidden"
@@ -104,4 +104,4 @@ if uploaded_file is not None or check_valid_github_url(streamlit_link):
             for o in others:
                 st.text("* " + o)
     else:
-        st.write("Please upload a Streamlit Python file or provide a GitHub URL for it.")
+        st.write("Please upload a Streamlit app Python file or provide a GitHub URL for it.")
