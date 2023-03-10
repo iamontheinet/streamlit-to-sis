@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 # Setup web page
 st.set_page_config(
-    page_title="Unsupported SiS features",
+    page_title="Streamlit to Streamlit-in-Snowflake",
     layout="wide",
     menu_items={
         "Get Help": "https://developers.snowflake.com",
@@ -34,7 +34,8 @@ def check_valid_github_url(url):
     if "github" in url and ("blob" in url or "raw" in url):
         return True
 
-st.header(f"Currently unsupported features in Streamlit-In-Snowflake (SiS)")
+st.header(f"Streamlit to Streamlit-in-Snowflake (SiS)")
+st.subheader("See which features in your Streamlit app are currently not supported in SiS")
 st.caption(f"App developed by [Dash](https://twitter.com/iamontheinet)")
 st.markdown("___")
 
@@ -48,9 +49,6 @@ with st.container():
         uploaded_file = st.file_uploader(
             "Upload your Streamlit Python file", accept_multiple_files=False, label_visibility="hidden"
         )
-
-    # with col2:
-    #     st.subheader("OR")
     
     with col2:
         st.subheader("Provide the GitHub URL of your Streamlit app Python file")
@@ -71,36 +69,40 @@ if uploaded_file is not None or check_valid_github_url(streamlit_link):
 
     if code_lines:
         with st.container():
-            data = []
+            bad_features = []
             possible_bad_features = []
             for code_line in code_lines:
                 for f in features:
                     idx = code_line.find(f)
                     if idx > 0:
-                        data.append([f, code_line.strip()])
+                        bad_features.append([f, code_line.strip()])
                 for p in possible_features:
                     idx = code_line.find(p)
                     if idx > 0:
                         possible_bad_features.append([p, code_line.strip()])
 
-            df = pd.DataFrame(data, columns=["Unsupported Feature in SiS", "Line"])
-            pbf = pd.DataFrame(
-                possible_bad_features, columns=["Possibly Unsupported Feature in SiS", "Line"]
-            )
+            if not (bad_features and possible_bad_features):
+                st.snow()
+                st.markdown("""<h1 style='color:#29b5e8; text-align:center'>Congratulations! Your Streamlit app is ready to be ported to SiS!</h1>""",unsafe_allow_html=True)          
+            else:
+                bdf = pd.DataFrame(bad_features, columns=["Unsupported Feature in SiS", "Line"])
+                pbf = pd.DataFrame(
+                    possible_bad_features, columns=["Possibly Unsupported Feature in SiS", "Line"]
+                )
 
-            # Remove any lines from pbf where the Line is in df
-            pbf = pbf[~pbf["Line"].isin(df["Line"])]
+                # Remove any lines from pbf where the Line is in bdf
+                pbf = pbf[~pbf["Line"].isin(bdf["Line"])]
 
-            st.subheader("Unsupported Features")
-            st.dataframe(df, use_container_width=True)
+                st.subheader("Unsupported Features")
+                st.dataframe(bdf, use_container_width=True)
+
+                st.markdown("___")
+                st.subheader("Possibly Unsupported Features")
+                st.dataframe(pbf, use_container_width=True)   
 
             st.markdown("___")
-            st.subheader("Possible Unsupported Features")
-            st.dataframe(pbf, use_container_width=True)
 
-            st.markdown("___")
-
-            st.subheader("Other Limitations")
+            st.subheader("Other Limitations To Keep In Mind")
             for o in others:
                 st.text("* " + o)
     else:
