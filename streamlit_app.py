@@ -14,6 +14,11 @@ st.set_page_config(
     },
 )
 
+st.header(f"Streamlit to Streamlit in Snowflake (SiS)")
+st.subheader("See which features in your Streamlit app are currently not supported in SiS")
+st.caption(f"App developed by [Dash](https://twitter.com/iamontheinet)")
+st.markdown("___")
+
 docs_url = "https://docs.snowflake.com/en/LIMITEDACCESS/streamlit-in-snowflake-limitations#label-streamlit-unsupported-features"
 
 def unsupported_features(url):
@@ -34,31 +39,26 @@ def check_valid_github_url(url):
     if "github" in url and ("blob" in url or "raw" in url):
         return True
 
-st.header(f"Streamlit to Streamlit-in-Snowflake (SiS)")
-st.subheader("See which features in your Streamlit app are currently not supported in SiS")
-st.caption(f"App developed by [Dash](https://twitter.com/iamontheinet)")
-st.markdown("___")
-
 uploaded_file = None
 
 with st.container():
     col1,col2= st.columns(2, gap='large')
 
-    # with col1:
-    #     st.subheader(
-    #         "Upload your Streamlit app Python file, OR 👉"
-    #     )
-    #     uploaded_file = st.file_uploader(
-    #         "Upload your Streamlit Python file", accept_multiple_files=False, label_visibility="hidden"
-    #     )
+    with col1:
+        st.subheader(
+            "Upload your Streamlit app Python file, OR 👉"
+        )
+        uploaded_file = st.file_uploader(
+            "Upload your Streamlit Python file", accept_multiple_files=False, label_visibility="hidden"
+        )
     
-    # with col1:
-    st.subheader("Provide the GitHub URL of your Streamlit app Python file")
-    st.text("For example, https://github.com/iamontheinet/streamlit-to-sis/blob/main/streamlit_app.py")
-    streamlit_link = st.text_input(
-        "Enter the GitHub URL of your Streamlit app Python file",
-        label_visibility="hidden"
-    )
+    with col2:
+        st.subheader("Provide the GitHub URL of your Streamlit app Python file")
+        st.text("For example, https://github.com/iamontheinet/streamlit-to-sis/blob/main/streamlit_app.py")
+        streamlit_link = st.text_input(
+            "Enter the GitHub URL of your Streamlit app Python file",
+            label_visibility="hidden"
+        )
 
 if uploaded_file is not None or check_valid_github_url(streamlit_link):
     features, possible_features, others = unsupported_features(docs_url)
@@ -107,5 +107,9 @@ if uploaded_file is not None or check_valid_github_url(streamlit_link):
             st.subheader("Other Limitations To Keep In Mind")
             for o in others:
                 st.text("* " + o)
+
+            st.markdown("___")
+            st.caption(f"For a full list and more information about unsupported features, please refer to the [documenataion]({docs_url}).")
+
     else:
         st.write("Please upload a Streamlit app Python file or provide a GitHub URL for it.")
