@@ -14,7 +14,7 @@ st.set_page_config(
     },
 )
 
-docs_url = "https://docs.snowflake.com/en/LIMITEDACCESS/streamlit-in-snowflake-intro"
+docs_url = "https://docs.snowflake.com/en/LIMITEDACCESS/streamlit-in-snowflake-limitations#label-streamlit-unsupported-features"
 
 def unsupported_features(url):
     response = requests.get(url)
