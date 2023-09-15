@@ -16,7 +16,8 @@ st.set_page_config(
 
 st.header(f"Streamlit to Streamlit in Snowflake (SiS)")
 st.subheader("See which features in your Streamlit app are currently not supported in SiS")
-st.caption(f"App developed by [Dash](https://twitter.com/iamontheinet)")
+st.caption(f"If you're new to Snowflake and Streamlit, checkout this step-by-step [QuickStart Guide](https://quickstarts.snowflake.com/guide/getting_started_with_snowpark_for_python_streamlit/index.html).")
+st.caption(f"App developed by Dash | [Twitter](https://twitter.com/iamontheinet) | [LinkedIn](https://www.linkedin.com/in/dash-desai/)")
 st.markdown("___")
 
 docs_url = "https://docs.snowflake.com/en/LIMITEDACCESS/streamlit-in-snowflake-limitations#label-streamlit-unsupported-features"
