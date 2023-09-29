@@ -20,7 +20,7 @@ st.caption(f"If you're new to Snowflake and Streamlit, checkout this step-by-ste
 st.caption(f"App developed by Dash | [Twitter](https://twitter.com/iamontheinet) | [LinkedIn](https://www.linkedin.com/in/dash-desai/)")
 st.markdown("___")
 
-docs_url = "https://docs.snowflake.com/en/LIMITEDACCESS/streamlit-in-snowflake-limitations#label-streamlit-unsupported-features"
+docs_url = "https://docs.snowflake.com/developer-guide/streamlit/limitations#label-streamlit-unsupported-features"
 
 def unsupported_features(url):
     response = requests.get(url)
@@ -110,7 +110,7 @@ if uploaded_file is not None or check_valid_github_url(streamlit_link):
                 st.text("* " + o)
 
             st.markdown("___")
-            st.caption(f"For a full list and more information about unsupported features, please refer to the [documenataion]({docs_url}).")
+            st.caption(f"For a full list and more information about unsupported features, please refer to the [documentation]({docs_url}).")
 
     else:
         st.write("Please upload a Streamlit app Python file or provide a GitHub URL for it.")
