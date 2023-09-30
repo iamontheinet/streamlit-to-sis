@@ -30,7 +30,7 @@ def unsupported_features(url):
     features = features + [f.replace("st.", "st.sidebar.") for f in features]
     possible_features = features + [f.replace("st.", ".") for f in features]
 
-    others = soup.find("div", {"id": "limitations-when-using-streamlit-in-snowflake"}).find_all(
+    others = soup.find("div", {"id": "limitations-and-unsupported-features-during-preview"}).find_all(
         "div"
     )
     others = [o.find("h3").text[:-1] for o in others]
