@@ -25,15 +25,30 @@ docs_url = "https://docs.snowflake.com/developer-guide/streamlit/limitations#lab
 def unsupported_features(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
+    features = []
+    possible_features = []
+    others = []
     features = soup.find_all("a", {"class": "reference external"})
-    features = [f.text for f in features if f.text.startswith("st.")]
-    features = features + [f.replace("st.", "st.sidebar.") for f in features]
-    possible_features = features + [f.replace("st.", ".") for f in features]
 
-    others = soup.find("div", {"id": "limitations-and-unsupported-features-during-preview"}).find_all(
-        "div"
-    )
-    others = [o.find("h3").text[:-1] for o in others]
+    try:
+        features = [f.text for f in features if f.text.startswith("st.")]
+        features = features + [f.replace("st.", "st.sidebar.") for f in features]
+    except:
+        features += ['N/A']
+    
+    try:
+        possible_features = features + [f.replace("st.", ".") for f in features]
+    except:
+        possible_features = ['N/A']
+    
+    try:
+        others = soup.find("div", {"id": "limitations-and-unsupported-features-during-preview"}).find_all(
+            "div"
+        )
+        others = [o.find("h3").text[:-1] for o in others]
+    except:
+        others = ['N/A']
+        
     return features, possible_features, others
 
 def check_valid_github_url(url):
