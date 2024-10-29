@@ -15,7 +15,7 @@ st.set_page_config(
 )
 
 st.header(f"Streamlit to Streamlit in Snowflake")
-st.subheader("See which features in your Streamlit app are currently not supported in Streamlit in Snowflake")
+st.write("See which features in your open-source Streamlit app are currently not supported in Streamlit in Snowflake.")
 st.caption(f"App developed by [Dash](https://www.linkedin.com/in/dash-desai/)")
 st.markdown("___")
 
@@ -88,7 +88,7 @@ if uploaded_file is not None or check_valid_github_url(streamlit_link):
 
             if not (bad_features):
                 st.snow()
-                st.markdown("""<h1 style='color:#29b5e8; text-align:center'>Congratulations! Your Streamlit app is ready to be ported to Snowflake!</h1>""",unsafe_allow_html=True)          
+                st.markdown("""<h2 style='color:#29b5e8; text-align:center'>Congratulations! Your Streamlit app is ready to be ported to Snowflake!</h2>""",unsafe_allow_html=True)          
             else:
                 bdf = pd.DataFrame(bad_features, columns=["Unsupported Feature", "Code"]).set_index("Unsupported Feature")
                 st.subheader("Unsupported Features")
