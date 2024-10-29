@@ -16,7 +16,6 @@ st.set_page_config(
 
 st.header(f"Streamlit to Streamlit in Snowflake")
 st.subheader("See which features in your Streamlit app are currently not supported in Streamlit in Snowflake")
-st.caption(f"If you're new to Snowflake and Streamlit, checkout this step-by-step [QuickStart Guide](https://quickstarts.snowflake.com/guide/getting_started_with_snowpark_for_python_streamlit/index.html).")
 st.caption(f"App developed by Dash | [Twitter](https://twitter.com/iamontheinet) | [LinkedIn](https://www.linkedin.com/in/dash-desai/)")
 st.markdown("___")
 
