@@ -16,7 +16,7 @@ st.set_page_config(
 
 st.header(f"Streamlit to Streamlit in Snowflake")
 st.subheader("See which features in your Streamlit app are currently not supported in Streamlit in Snowflake")
-st.caption(f"App developed by Dash | [Twitter](https://twitter.com/iamontheinet) | [LinkedIn](https://www.linkedin.com/in/dash-desai/)")
+st.caption(f"App developed by [Dash](https://www.linkedin.com/in/dash-desai/)")
 st.markdown("___")
 
 docs_url = "https://docs.snowflake.com/developer-guide/streamlit/limitations#label-streamlit-unsupported-features"
